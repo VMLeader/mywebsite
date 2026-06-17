@@ -1,5 +1,5 @@
 /* ============================
-   VERTICAL MOTIONS Ã¢ÂÂ GLOBAL STYLES
+   VERTICAL MOTIONS ÃÂ¢ÃÂÃÂ GLOBAL STYLES
    wholeexecutive.com
    ============================ */
 
@@ -609,7 +609,7 @@ footer {
   margin-bottom: 48px;
 }
 .footer-brand .nav-logo { margin-bottom: 14px; }
-.footer-brand p { font-size: 0.875rem; line-height: 1.7; max-width: 280px; }
+.footer-brand p { font-size: 0.875rem; line-height: 1.7; max-width: 280px; color: rgba(255,255,255,0.85); }
 .footer-col h5 {
   font-family: var(--font-head);
   font-size: 0.75rem;
