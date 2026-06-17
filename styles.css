@@ -231,7 +231,7 @@ nav.scrolled { box-shadow: 0 8px 40px rgba(8,30,43,0.35); }
   display: grid;
   grid-template-columns: 1fr 420px;
   gap: 64px;
-  align-items: center;
+  align-items: start;
   position: relative;
   z-index: 1;
 }
@@ -267,7 +267,7 @@ nav.scrolled { box-shadow: 0 8px 40px rgba(8,30,43,0.35); }
 
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 6vw, 5.2rem);
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
   font-weight: 400;
   color: var(--white);
   line-height: 1.04;
@@ -304,6 +304,7 @@ nav.scrolled { box-shadow: 0 8px 40px rgba(8,30,43,0.35); }
 
 /* Hero risk card */
 .hero-risk-card {
+  margin-top: 64px;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 20px;
