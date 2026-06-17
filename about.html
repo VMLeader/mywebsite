@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Vertical Motion ELT Scaling Suite</title>
+  <meta name="description" content="Meet the Vertical Motion team &mdash; former CEOs, operators, military leaders, and coaches who've sat in the seats they coach.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    /* Team card with headshot */
+    .team-card-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      background: var(--navy-mid);
+    }
+    .team-card-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .team-card-photo-placeholder span {
+      font-family: var(--font-head);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.25);
+    }
+    .team-card-meta {
+      padding: 20px 22px 6px;
+    }
+    .team-card-meta h3 {
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin-bottom: 3px;
+      line-height: 1.2;
+    }
+    .team-card-meta .role {
+      font-size: 0.72rem;
+      color: var(--slate);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      line-height: 1.4;
+    }
+    .team-card-bio {
+      padding: 12px 22px 24px;
+    }
+    .team-card-bio p {
+      font-size: 0.875rem;
+      color: var(--ink-mid);
+      line-height: 1.7;
+      margin: 0;
+    }
+    .team-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--white);
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+    .team-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+
+    /* Founder feature */
+    .founder-card {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 72px;
+      background: var(--white);
+    }
+    .founder-photo {
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .founder-body {
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    @media (max-width: 900px) {
+      .founder-card { grid-template-columns: 1fr; }
+      .founder-photo { min-height: 320px; }
+      .founder-body { padding: 32px; }
+    }
+    @media (max-width: 720px) {
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .team-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Bio truncation */
+    .bio-text {
+      max-height: 5.25rem;
+      overflow: hidden;
+      position: relative;
+      transition: max-height 0.35s ease;
+    }
+    .bio-text.expanded {
+      max-height: 100em;
+    }
+    .bio-text:not(.expanded)::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2rem;
+      background: linear-gradient(transparent, #fff);
+      pointer-events: none;
+    }
+    .bio-toggle {
+      background: none;
+      border: none;
+      color: var(--orange);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 0 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      letter-spacing: 0.01em;
+    }
+    .bio-toggle:hover { text-decoration: underline; }
+
+    /* Tighten section spacing */
+    section { padding: 60px 0; }
+    .page-hero { padding: 120px 0 56px; }
+    .cta-section { padding: 72px 0; }
+    section.bg-gray { padding: 60px 0; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="Vertical Motion logo">
+      <div class="nav-logo-text">
+        <span class="brand">Vertical Motion</span>
+        <span class="tagline">ELT Scaling Suite</span>
+      </div>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="scorecard.html">ELT Risk Scorecard</a>
+      <a href="ldna.html">LDNA</a>
+      <a href="about.html" class="active">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="scorecard.html" class="btn-nav-cta">Get Your ELT Risk Score &rarr;</a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <span class="eyebrow" style="color:rgba(252,101,2,0.7); margin-bottom:16px; display:block;">About Vertical Motion</span>
+    <h1>We've sat in the seats<br><em>we coach.</em></h1>
+    <p style="margin-top:18px; max-width:580px;">Vertical Motion is a team of former CEOs, military officers, operators, and coaches who've lived the leadership challenges that break companies at scale. We don't teach theory. We work from experience.</p>
+
+  </div>
+</section>
+
+<!-- MISSION -->
+<section>
+  <div class="container">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start;">
+      <div>
+        <span class="eyebrow" style="margin-bottom:14px; display:block;">Our mission</span>
+        <h2 style="margin-bottom:20px;">Upgrade the team. Unlock the next stage.</h2>
+        <p>Vertical Motion was founded to mentor aspiring and emerging executives on how to build their own executive style, executive presence, and executive network.</p>
+        <p style="margin-top:16px;">The ELT Scaling Suite is the product of what we've learned working inside fast-scaling companies, coaching CEOs through transitions, and watching leadership teams succeed and fail in real time.</p>
+        <p style="margin-top:16px;">We believe the most important work a CEO can do at scale is upgrade the team around them. Not add headcount. Not raise more capital. Upgrade the team.</p>
+      </div>
+      <div style="border-radius:var(--radius-md); overflow:hidden; height:100%; min-height:420px;">
+        <img
+          src="images/about-team.jpg"
+          alt="Vertical Motion team in action"
+          style="width:100%; height:100%; min-height:420px; object-fit:cover; object-position:center; display:block;"
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER FEATURE -->
+<section class="bg-gray">
+  <div class="container">
+    <div class="founder-card">
+      <img
+        src="images/team/tom-cox.jpg"
+        alt="Tom Cox, Founder of Vertical Motion"
+        class="founder-photo"
+      >
+      <div class="founder-body">
+        <span class="badge badge-orange" style="margin-bottom:18px; display:inline-block;">Founder's Story</span>
+        <h3 style="font-size:1.5rem; margin-bottom:6px;">Tom Cox</h3>
+        <p style="font-size:0.75rem; font-weight:700; color:var(--orange); letter-spacing:0.05em; text-transform:uppercase; margin-bottom:24px;">Founder &bull; Executive Coach &bull; Author &bull; 3x CEO &bull; Army Veteran &bull; Leukemia Survivor</p>
+        <div class="bio-text" style="max-height:9rem;">
+          <p>Tom has closed more than $1.5B in new business throughout his career, has an MBA from Georgia State University, and holds multiple patents for his work in satellite technology innovation. Tom also served in the US Army as a combat medic and satellite controller, and volunteers as a mentor and speaker at Patriot Boot Camp, which helps veterans and military spouses enter the world of entrepreneurship. He lives in Denver, Colorado with his wife of 20+ years and two teenage children.</p>
+          <p style="margin-top:12px;">In August of 2022, Tom was diagnosed with Acute Myeloid Leukemia and given less than two months to live. Six months of multiple hospitalizations, chemotherapy, and a handful of near-death experiences helped Tom to realize that of all the things he has done in his career, inspiring and mentoring others was the most rewarding and energizing for him.</p>
+          <p style="margin-top:12px;">With a second chance at life, Tom is leaning into these skills. Tom started Vertical Motion to mentor aspiring and emerging executives on how to build their own executive style, executive presence and executive network. With 15+ years experience in VP and C-level executive roles in high-growth environments, Tom has the advantage of having sat in the executive chair himself, and is excited to mentor and energize an entirely new generation of business leaders on how to become the best, most authentic leaders they can be.</p>
+        </div>
+        <button class="bio-toggle" onclick="toggleBio(this)" style="margin-top:8px;">Read more <span>&#8595;</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM GRID -->
+<section>
+  <div class="container">
+    <div class="section-head left" style="margin-bottom:52px;">
+      <span class="eyebrow" style="margin-bottom:10px; display:block;">Meet the team</span>
+      <h2>Real experience. Real results.</h2>
+      <p style="max-width:600px; margin-top:12px;">Every member of the Vertical Motion team has led at a senior level in a real organization. We've been in the chair. That's what makes the coaching different.</p>
+    </div>
+
+    <div class="team-grid">
+
+      <!-- Ryan -->
+      <div class="team-card">
+        <img
+          src="images/team/ryan-roberts.jpg"
+          alt="Ryan Roberts"
+          class="team-card-photo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <div class="team-card-photo-placeholder" style="display:none;"><span>RR</span></div>
+        <div class="team-card-meta">
+          <h3>Ryan Roberts</h3>
+          <div class="role">Executive Coach &bull; Director of Operations &amp; Client Success</div>
+        </div>
+        <div class="team-card-bio">
+          <div class="bio-text"><p>Ryan served 20 years as a U.S. Air Force officer and fighter pilot, leading high-stakes missions and shaping military strategy at the highest levels. After transitioning from the Air Force, he built and ran successful businesses, applying his expertise in leadership, strategy, and execution to drive measurable growth. As co-founder of a defense contracting firm, he secured multimillion-dollar contracts and led initiatives that set new safety standards in military training.</p>
+          <p style="margin-top:12px;">In 2018, Ryan embraced an unconventional lifestyle, leading his company remotely while living aboard a sailboat and exploring over a dozen countries and covering over 10,000 miles in the Atlantic and Caribbean. This experience reinforced his belief in adaptability, strategic vision, and the power of bold decision-making in uncertain environments.</p>
+          <p style="margin-top:12px;">Today, Ryan is responsible for overseeing business operations and ensuring client success, while also mentoring and coaching leaders to turn ambitious visions into reality. With extensive experience in executive leadership and strategic execution, he guides professionals in refining their leadership style, improving operations, and scaling businesses effectively. He emphasizes the importance of resilience and high performance, helping leaders thrive under pressure and navigate conflict as a driver for growth.</p>
+          <p style="margin-top:12px;">Ryan is committed to building high-performing teams and fostering a culture of continuous growth and innovation. He believes that the right combination of strategy, execution, and adaptability empowers leaders to achieve lasting impact in their organizations and beyond.</p></div>
+          <button class="bio-toggle" onclick="toggleBio(this)">Read more <span>&#8595;</span></button>
+        </div>
+      </div>
+
+      <!-- Renard -->
+      <div class="team-card">
+        <img
+          src="images/team/renard-henry.jpg"
+          alt="Renard Henry"
+          class="team-card-photo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <div class="team-card-photo-placeholder" style="display:none;"><span>RH</span></div>
+        <div class="team-card-meta">
+          <h3>Renard Henry</h3>
+          <div class="role">Vertical Motion Certified Coach</div>
+        </div>
+        <div class="team-card-bio">
+          <div class="bio-text"><p>Renard is a visionary IT leader with more than 25 years of progressive leadership experience across enterprise IT, infrastructure, service management, and cybersecurity. He is adept at transforming IT from a support function into a strategic business partner, driving measurable business value through cloud adoption, automation, and scalable digital platforms.</p>
+          <p style="margin-top:12px;">He is known for building and developing high-performing teams, instilling a culture of continuous improvement, and aligning technology initiatives tightly with business objectives. Throughout his career, Renard has successfully modernized operations, reduced costs, improved service delivery, and led digital transformations that enhance organizational agility, security, and customer satisfaction.</p>
+          <p style="margin-top:12px;">Renard's leadership philosophy is strongly influenced by his background as a black belt in Brazilian Jiu-Jitsu. The discipline, adaptability, and composure required on the mat directly inform his approach to executive leadership and coaching. He applies these principles to help leaders operate effectively under pressure, make disciplined decisions in complex environments, and continuously refine their leadership craft.</p>
+          <p style="margin-top:12px;">In addition to his executive leadership and coaching work, Renard is the co-host of the <em>Black Belts &amp; Boardrooms</em> podcast, where he explores the intersection of executive leadership, technology, governance, and martial arts philosophy with senior leaders and industry practitioners.</p></div>
+          <button class="bio-toggle" onclick="toggleBio(this)">Read more <span>&#8595;</span></button>
+        </div>
+      </div>
+
+      <!-- Jen -->
+      <div class="team-card">
+        <img
+          src="images/team/jen-rigsby.jpg"
+          alt="Jen Rigsby"
+          class="team-card-photo"
+          style="object-position:50% 25%;"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <div class="team-card-photo-placeholder" style="display:none;"><span>JR</span></div>
+        <div class="team-card-meta">
+          <h3>Jen Rigsby</h3>
+          <div class="role">Vertical Motion Certified Coach</div>
+        </div>
+        <div class="team-card-bio">
+          <div class="bio-text"><p>Jen partners with C-suite and senior leaders to shape transformative change initiatives that demand enterprise alignment and disciplined prioritization. She works with leaders making consequential enterprise decisions during large-scale change, when unclear priorities and delayed trade-offs put performance, trust, and leadership credibility at risk. Her experience spans complex operating models across healthcare, franchise, retail, and public sector organizations, where decision quality directly affected outcomes.</p>
+          <p style="margin-top:12px;">Jen is known for stepping into situations where trust and clarity had eroded and momentum was at risk. Working at the intersection of strategy, technology, and people, she helps executive teams cut through noise, surface real trade-offs, and protect what differentiates the organization during change.</p>
+          <p style="margin-top:12px;">In parallel, Jen coaches technically and operationally strong leaders preparing to step into executive roles. Her coaching centers on how leaders think, decide, and show up as accountability expands. Drawing on her experience living and working internationally, Jen brings a global perspective to leadership and change, shaped by navigating cultural nuance while maintaining clarity, trust, and momentum.</p></div>
+          <button class="bio-toggle" onclick="toggleBio(this)">Read more <span>&#8595;</span></button>
+        </div>
+      </div>
+
+      <!-- Dave -->
+      <div class="team-card">
+        <img
+          src="images/team/dave-crull.jpg"
+          alt="Dave Crull"
+          class="team-card-photo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <div class="team-card-photo-placeholder" style="display:none;"><span>DC</span></div>
+        <div class="team-card-meta">
+          <h3>Dave Crull</h3>
+          <div class="role">Vertical Motion Certified Coach</div>
+        </div>
+        <div class="team-card-bio">
+          <div class="bio-text"><p>Dave is a senior executive with deep experience helping organizations navigate complexity, scale responsibly, and make sound decisions under pressure. He has served as a Chief Financial Officer and Chief Investment Officer in multiple large global enterprises, PE-backed organizations, and private investment vehicles, partnering closely with CEOs, boards, and executive teams across finance, operations, and commercial strategy. He holds a BS in Professional Aeronautics from Embry Riddle Aeronautical University, an MBA from the University of Dallas, and is a former U.S. Marine.</p>
+          <p style="margin-top:12px;">Dave is also the host of <em>The BJJ Executive Podcast</em>, which explores the tension many high-performing leaders face between ambition and wellbeing, responsibility and presence, success and fulfillment. He also serves on the board of The Mat Mission, a non-profit bringing jiu jitsu to underprivileged communities.</p>
+          <p style="margin-top:12px;">Today, Dave works with executives, founders, and professionals navigating periods of transition or increased responsibility. His coaching focuses on clarity, alignment, and practical execution, helping clients cut through noise, make better decisions, and build careers and lives that are both effective and sustainable.</p></div>
+          <button class="bio-toggle" onclick="toggleBio(this)">Read more <span>&#8595;</span></button>
+        </div>
+      </div>
+
+      <!-- Mizuki -->
+      <div class="team-card">
+        <img
+          src="images/team/mizuki.jpg"
+          alt="Mizuki"
+          class="team-card-photo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <div class="team-card-photo-placeholder" style="display:none;"><span>MK</span></div>
+        <div class="team-card-meta">
+          <h3>Mizuki Lee</h3>
+          <div class="role">Vertical Motion Certified Coach</div>
+        </div>
+        <div class="team-card-bio">
+          <div class="bio-text"><p>Mizuki is a healthcare executive and managed care strategist who has built her career in high-pressure boardrooms and courtrooms, negotiating complex agreements with the nation's largest health insurers while showing up with equal force in the community.</p>
+          <p style="margin-top:12px;">Shaped by Oriental practices, from calligraphy to the art of knowing yourself clearly enough to lead, Mizuki brings a perspective on leadership grounded in presence and self-command.</p>
+          <p style="margin-top:12px;">She knows what it means to start anew. She walked away from a situation many don't leave, with nothing but her car and the refusal to compromise herself further. She once spent an entire day climbing a frozen mountain in January: no equipment, no guide, sliding back with every step forward, and made it to the top anyway. That's not a metaphor. That's her history. And it's what she brings into every session.</p>
+          <p style="margin-top:12px;">A 2025 Pacific Business News 40 Under 40 honoree, Mizuki serves in Family Court as a Guardian ad Litem. Her approach: self-awareness is an underutilized multiplier. She coaches leaders who are ready to understand what's beneath to 10x their output.</p></div>
+          <button class="bio-toggle" onclick="toggleBio(this)">Read more <span>&#8595;</span></button>
+        </div>
+      </div>
+
+      <!-- Matt -->
+      <div class="team-card">
+        <img
+          src="images/team/matt-ezyk.jpg"
+          alt="Matt Ezyk"
+          class="team-card-photo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <div class="team-card-photo-placeholder" style="display:none;"><span>ME</span></div>
+        <div class="team-card-meta">
+          <h3>Matt Ezyk</h3>
+          <div class="role">Vertical Motion Certified Coach</div>
+        </div>
+        <div class="team-card-bio">
+          <div class="bio-text"><p>Matt is a digital commerce executive who has spent his career at the intersection of technology and revenue, leading platform transformation, ecommerce strategy, and AI-driven customer experience for premium retail and DTC brands. He currently leads commerce engineering at Hanna Andersson, and previously led digital at Pet Supermarket, owning both the commercial and engineering sides of the business. Earlier in his career he held leadership roles at RafterOne, Accenture, and Merkle, shaping commerce experiences for brands including Skechers, L.L.Bean, Uniqlo, Disney, and Tapestry.</p>
+          <p style="margin-top:12px;">Matt describes himself as a marketer trapped in a technologist's body, equally fluent setting commercial strategy and directing the engineering that delivers it. That dual fluency is the core of how he coaches: helping technically strong leaders translate what they build into the language of revenue, boards, and executive influence.</p>
+          <p style="margin-top:12px;">As a coach, Matt works with emerging and aspiring executives navigating the move from running a function to owning an outcome. His focus is executive presence, narrative, and network: helping leaders position themselves as owners of outcomes rather than responders to problems, build the personal brand and ecosystem relationships that open doors, and communicate with clarity at the level where careers are made.</p></div>
+          <button class="bio-toggle" onclick="toggleBio(this)">Read more <span>&#8595;</span></button>
+        </div>
+      </div>
+
+      <!-- Briana -->
+      <div class="team-card">
+        <img
+          src="images/team/briana-jesionek.jpg"
+          alt="Briana Jesionek"
+          class="team-card-photo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <div class="team-card-photo-placeholder" style="display:none;"><span>BJ</span></div>
+        <div class="team-card-meta">
+          <h3>Briana Jesionek</h3>
+          <div class="role">Vertical Motion Certified Coach</div>
+        </div>
+        <div class="team-card-bio">
+          <div class="bio-text"><p>Briana is an executive career coach and innovative leader known for helping emerging, high-performing professionals break through career ceilings and step confidently into their next level of leadership.</p>
+          <p style="margin-top:12px;">With nearly 20 years of experience across the P&amp;C insurance industry, including 15 years at Nationwide and leadership roles at Great American Insurance Group, Briana has built a reputation for stepping into roles that didn't yet exist, turning ambiguity into opportunity and leading enterprise transformation from the ground up.</p>
+          <p style="margin-top:12px;">Her path to leadership followed an unconventional route. Early in her career, Briana was told that without advanced education, her growth would be limited. Instead of accepting that narrative, she created her own, building a career defined by resilience, bold decisions, and a refusal to stay in a box.</p>
+          <p style="margin-top:12px;">Today, Briana helps emerging leaders go from overlooked to fully empowered, equipping them with the clarity, confidence, and boldness to make career-defining moves. She is passionate about helping others build careers that feel as good as they look on paper.</p></div>
+          <button class="bio-toggle" onclick="toggleBio(this)">Read more <span>&#8595;</span></button>
+        </div>
+      </div>
+
+      <!-- Chris -->
+      <div class="team-card">
+        <img
+          src="images/team/chris-martin.jpg"
+          alt="Chris Martin"
+          class="team-card-photo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <div class="team-card-photo-placeholder" style="display:none;"><span>CM</span></div>
+        <div class="team-card-meta">
+          <h3>Chris Martin</h3>
+          <div class="role">Vertical Motion Certified Coach</div>
+        </div>
+        <div class="team-card-bio">
+          <div class="bio-text"><p>Chris came to leadership through an unlikely door. He graduated with a fine arts degree; an unexpected opportunity landed him in wealth management, and he never looked back. The fine arts background gave him a different lens than most of his peers, a habit of noticing what others walked past. That perspective never left him. Neither did a core belief: that people are almost always more capable than they know.</p>
+          <p style="margin-top:12px;">Over the next 20 years, Chris worked inside organizations at nearly every scale, from a mid-size wealth management firm to a Fortune 500 brokerage to a high-growth fintech. What he kept seeing, regardless of size, was the same pattern: organizations drift as a natural consequence of growth. The same conversations resurface in slightly different form. Nothing is obviously broken, but progress slows anyway.</p>
+          <p style="margin-top:12px;">That outside perspective is what Chris brings today. He works with founders and emerging leaders who are ready for an honest outside read, someone who can see the system clearly, name what's actually happening, and help them reframe their situation so they can move forward with confidence. Chris holds an MBA from the University of Denver and a Project Management Professional (PMP) certification. He is based in North Vancouver, BC.</p></div>
+          <button class="bio-toggle" onclick="toggleBio(this)">Read more <span>&#8595;</span></button>
+        </div>
+      </div>
+
+      <!-- Allan -->
+      <div class="team-card">
+        <img
+          src="images/team/allan-ng.jpg"
+          alt="Allan Ng"
+          class="team-card-photo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <div class="team-card-photo-placeholder" style="display:none;"><span>AN</span></div>
+        <div class="team-card-meta">
+          <h3>Allan Ng</h3>
+          <div class="role">Vertical Motion Certified Coach</div>
+        </div>
+        <div class="team-card-bio">
+          <div class="bio-text"><p>Allan is an executive leader and leadership coach with extensive experience building and leading high-performing teams in fast-paced, customer-focused organizations. Throughout his career, he has led large, geographically dispersed teams through growth, operational transformation, and organizational change, helping leaders strengthen execution while building cultures rooted in accountability, trust, and continuous development.</p>
+          <p style="margin-top:12px;">An accomplished endurance athlete, Allan has competed across multiple Ironman 70.3 races, qualified for the Ironman 70.3 World Championship, and completed full-distance Ironman triathlons. These experiences deeply shaped his perspective on discipline, resilience, and sustained performance. Meaningful results are rarely produced through intensity alone, but through consistency, preparation, and the ability to perform under sustained pressure over time.</p>
+          <p style="margin-top:12px;">As a coach, Allan works with emerging and experienced leaders navigating increased responsibility, organizational complexity, and inflection points in their careers. He helps leaders strengthen self-awareness, improve decision-making, elevate executive presence, and build the confidence required to lead through uncertainty. His coaching approach is practical, direct, and grounded in real-world leadership experience.</p></div>
+          <button class="bio-toggle" onclick="toggleBio(this)">Read more <span>&#8595;</span></button>
+        </div>
+      </div>
+
+      <!-- Brett -->
+      <div class="team-card">
+        <img
+          src="images/team/brett-buske.jpg"
+          alt="Brett Buske"
+          class="team-card-photo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <div class="team-card-photo-placeholder" style="display:none;"><span>BB</span></div>
+        <div class="team-card-meta">
+          <h3>Brett Buske</h3>
+          <div class="role">Vertical Motion Certified Coach</div>
+        </div>
+        <div class="team-card-bio">
+          <div class="bio-text"><p>Brett's leadership perspective has been shaped by experiences in military service, aviation, entrepreneurship, and cybersecurity. His work centers on helping leaders navigate complexity with clarity, sound judgment, and a strong sense of personal accountability.</p>
+          <p style="margin-top:12px;">He began his professional journey in the U.S. Marine Corps, where the demands of service shaped his views on leadership, work ethic, and responsibility to others. Those lessons carried forward into nearly a decade in civilian aviation, including founding and operating a small business, before transitioning into cybersecurity and technology leadership roles.</p>
+          <p style="margin-top:12px;">As an executive coach, Brett emphasizes self-discovery and intrinsic motivation, helping leaders slow down, reflect, and reconnect with what drives their decisions. He believes meaningful growth often comes through discomfort and that sustained performance is built through alignment between values, purpose, and action. Brett holds a BS from Embry-Riddle Aeronautical University and an MBA from Clemson University.</p></div>
+          <button class="bio-toggle" onclick="toggleBio(this)">Read more <span>&#8595;</span></button>
+        </div>
+      </div>
+
+      <!-- Dan -->
+      <div class="team-card">
+        <img
+          src="images/team/dan-kaufmann.jpg"
+          alt="Dan Kaufmann"
+          class="team-card-photo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <div class="team-card-photo-placeholder" style="display:none;"><span>DK</span></div>
+        <div class="team-card-meta">
+          <h3>Dan Kaufmann</h3>
+          <div class="role">Vertical Motion Certified Coach</div>
+        </div>
+        <div class="team-card-bio">
+          <div class="bio-text"><p>Dan is an accomplished elite-performance executive coach, scholar-practitioner, and business strategist with over two decades of leadership experience across major professional sports leagues and collegiate organizations. He has directed high-performing strategy and corporate partnership teams for iconic organizations, including the New York Jets and the New Orleans Saints and Pelicans, consistently turning complex cross-functional challenges into historic revenue generation and sustainable organizational alignment.</p>
+          <p style="margin-top:12px;">What sets Dan apart is his powerful blend of corporate elite experience and academic rigor. He holds a Doctorate in Business Administration from the University of South Florida, with specialized research in sports sponsorship sales cycles, alongside an MBA and an MS in Marketing from the University of Tampa. This foundation allows him to bridge complex psychometric data and actionable commercial execution.</p>
+          <p style="margin-top:12px;">Deeply committed to paying it forward, Dan actively mentors the next generation of leaders through his work with organizations like the Pro Sports Assembly, General Sports Worldwide, and various university business committees. Grounded by a philosophy of continuous improvement, getting 1% better every day, he coaches with immense empathy, insight, and a relentless focus on alignment.</p></div>
+          <button class="bio-toggle" onclick="toggleBio(this)">Read more <span>&#8595;</span></button>
+        </div>
+      </div>
+
+      <!-- Nicole -->
+      <div class="team-card">
+        <img
+          src="images/team/nicole-cox.jpg"
+          alt="Nicole Cox"
+          class="team-card-photo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <div class="team-card-photo-placeholder" style="display:none;"><span>NC</span></div>
+        <div class="team-card-meta">
+          <h3>Nicole Cox</h3>
+          <div class="role">Co-Founder &bull; Marketing &amp; Administration</div>
+        </div>
+        <div class="team-card-bio">
+          <div class="bio-text"><p>Nicole has more than 20 years of marketing experience, including working for startups as well as Fortune 500 technology companies. Her main focus was conferences, events and tradeshows. She has produced events ranging from 14 attendees up to 27,000 attendees world-wide.</p>
+          <p style="margin-top:12px;">She loves to manage things behind the curtain. Nicole co-founded Vertical Motion and is committed to ushering in a new group of empathetic, authentic and audacious leaders.</p></div>
+          <button class="bio-toggle" onclick="toggleBio(this)">Read more <span>&#8595;</span></button>
+        </div>
+      </div>
+    </div><!-- /team-grid -->
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container" style="position:relative; z-index:1;">
+    <span class="eyebrow" style="color:rgba(252,101,2,0.7);">Ready to work together?</span>
+    <h2 style="color:var(--white); max-width:640px; margin:16px auto 18px;">Start with the free scorecard. See if this is the right fit.</h2>
+    <p style="color:rgba(207,232,239,0.65); max-width:520px; margin:0 auto 40px;">The ELT Risk Scorecard takes 7 minutes and gives you an honest read on where your leadership team is most exposed. No sales call required to get the results.</p>
+    <div class="cta-actions">
+      <a href="scorecard.html" class="btn btn-primary btn-lg btn-pill">Take the Free Scorecard &rarr;</a>
+      <a href="contact.html" class="btn btn-ghost-white btn-lg btn-pill">Talk to the team</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:16px;">
+          <img src="logo.png" alt="Vertical Motion">
+          <div class="nav-logo-text">
+            <span class="brand" style="color:var(--white);">Vertical Motion</span>
+            <span class="tagline">ELT Scaling Suite</span>
+          </div>
+        </div>
+        <p>Build the team that scales your vision.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Tools</h5>
+        <ul>
+          <li><a href="scorecard.html">ELT Risk Scorecard</a></li>
+          <li><a href="ldna.html">LDNA Assessment</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="https://vmleader.com" target="_blank" rel="noopener">vmleader.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Get Started</h5>
+        <ul>
+          <li><a href="scorecard.html">Take the Free Scorecard</a></li>
+          <li><a href="contact.html">Request a Risk Review</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Vertical Motion. All rights reserved.</p>
+      <p><a href="https://wholeexecutive.com" style="color:rgba(255,255,255,0.3);">wholeexecutive.com</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+function toggleBio(btn) {
+  const bio = btn.previousElementSibling;
+  const expanded = bio.classList.toggle('expanded');
+  const arrow = btn.querySelector('span');
+  btn.firstChild.textContent = expanded ? 'Read less ' : 'Read more ';
+  arrow.innerHTML = expanded ? '&#8593;' : '&#8595;';
+}
+
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20));
+document.getElementById('nav-hamburger').addEventListener('click', () => {
+  document.getElementById('nav-links').classList.toggle('open');
+});
+</script>
+</body>
+</html>

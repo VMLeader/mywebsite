@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your ELT Risk Snapshot | Vertical Motion</title>
+  <meta name="description" content="Your Executive Leadership Team Risk Scorecard results.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    .results-layout { display: grid; grid-template-columns: 1fr 360px; gap: 48px; align-items: start; }
+    .results-sidebar { position: sticky; top: 88px; }
+    .overall-card {
+      background: var(--navy);
+      border-radius: var(--radius-md);
+      padding: 36px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .overall-card p { margin: 0; }
+    .overall-num {
+      font-family: var(--font-head);
+      font-size: 4rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1;
+      margin: 16px 0 8px;
+    }
+    .overall-label { font-size: 0.875rem; color: rgba(207,232,239,0.7); }
+    .overall-tier {
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      margin-top: 16px;
+    }
+    .tier-critical { background: rgba(198,40,40,0.2); color: #ffaaaa; }
+    .tier-caution  { background: rgba(255,140,66,0.2); color: #ffcc99; }
+    .tier-moderate { background: rgba(255,193,7,0.2);  color: #ffe599; }
+    .tier-strong   { background: rgba(40,167,69,0.2);  color: #aaffbb; }
+
+    .cta-sidebar-card {
+      background: var(--gray-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+    }
+
+    @media (max-width: 880px) {
+      .results-layout { grid-template-columns: 1fr; }
+      .results-sidebar { position: static; }
+    }
+
+    @keyframes barGrow {
+      from { width: 0; }
+    }
+    .dim-bar-fill { animation: barGrow 1s ease both; }
+
+    .print-btn { cursor:pointer; }
+    @media print {
+      nav, footer, .results-sidebar, .cta-section { display: none !important; }
+      .results-layout { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="Vertical Motion logo" width="40" height="40">
+      <div class="nav-logo-text">
+        <span class="brand">Vertical Motion</span>
+        <span class="tagline">ELT Scaling Suite</span>
+      </div>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="scorecard.html">ELT Risk Scorecard</a>
+      <a href="ldna.html">LDNA</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="contact.html" class="btn-nav-cta">Book a Risk Review &rarr;</a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- RESULTS HERO -->
+<div id="results-hero" style="background:var(--navy); padding:120px 0 56px; position:relative; overflow:hidden;">
+  <div style="position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 100% 0%, rgba(91,124,153,0.2) 0%, transparent 60%); pointer-events:none;"></div>
+  <div class="container" style="position:relative; z-index:1;">
+    <p class="eyebrow" style="color:rgba(207,232,239,0.7);">ELT Risk Scorecard</p>
+    <h1 id="hero-headline" style="color:white; max-width:680px; margin-bottom:12px;">Your Leadership Team Risk Snapshot</h1>
+    <p id="hero-sub" style="color:rgba(207,232,239,0.8); max-width:600px; font-size:1.0625rem;">Here's how your executive team is performing across fit, coverage, load, decisions, and trust.</p>
+    <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+      <button class="btn btn-outline print-btn" onclick="window.print()">&#128438; Print / Save PDF</button>
+      <a href="scorecard.html" class="btn btn btn-outline-navy">Retake Scorecard</a>
+    </div>
+  </div>
+</div>
+
+<!-- NO-DATA FALLBACK -->
+<div id="no-data" style="display:none; text-align:center; padding:96px 32px;">
+  <h3 style="margin-bottom:16px;">No scorecard results found.</h3>
+  <p style="margin-bottom:32px;">It looks like you landed here directly. Take the 7-minute scorecard to see your results.</p>
+  <a href="scorecard.html" class="btn btn-primary btn-lg">Take the ELT Risk Scorecard &rarr;</a>
+</div>
+
+<!-- MAIN RESULTS -->
+<section id="results-main" style="padding:64px 0 96px; display:none;">
+  <div class="container">
+    <div class="results-layout">
+
+      <!-- LEFT: Detailed results -->
+      <div>
+
+        <!-- Top risks -->
+        <div style="margin-bottom:48px;">
+          <p class="eyebrow" style="margin-bottom:8px;">Your top failure risks</p>
+          <h2 style="margin-bottom:24px; font-size:1.75rem;">The 3 areas with the highest exposure on your team today.</h2>
+          <div id="top-risks"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Dimension breakdown -->
+        <div>
+          <p class="eyebrow" style="margin-bottom:8px;">Full dimension breakdown</p>
+          <h3 style="margin-bottom:8px;">All 5 dimensions scored.</h3>
+          <p style="margin-bottom:28px; font-size:0.9375rem;">Scores from 0&ndash;100. Below 50 = high risk. 50&ndash;74 = watch closely. 75+ = solid foundation.</p>
+          <div id="dim-cards"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- What to do -->
+        <div>
+          <p class="eyebrow" style="margin-bottom:8px;">What to do with this</p>
+          <h3 style="margin-bottom:16px;">Your next step depends on where you are.</h3>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:32px;">
+            <div style="padding:24px; background:var(--gray-bg); border-radius:var(--radius-md); border-left:3px solid var(--navy);">
+              <h4 style="font-size:0.9375rem; margin-bottom:8px;">If you're raising capital</h4>
+              <p style="font-size:0.875rem; margin:0;">Your investors are already looking at your leadership team. Get ahead of their diligence with a documented risk map and a plan to close the gaps.</p>
+            </div>
+            <div style="padding:24px; background:var(--gray-bg); border-radius:var(--radius-md); border-left:3px solid var(--navy);">
+              <h4 style="font-size:0.9375rem; margin-bottom:8px;">If you're scaling headcount</h4>
+              <p style="font-size:0.875rem; margin:0;">Adding headcount before fixing leadership team gaps scales the problem, not the solution. Start here first.</p>
+            </div>
+            <div style="padding:24px; background:var(--gray-bg); border-radius:var(--radius-md); border-left:3px solid var(--orange);">
+              <h4 style="font-size:0.9375rem; margin-bottom:8px;">If something keeps breaking</h4>
+              <p style="font-size:0.875rem; margin:0;">Most operational problems have a leadership team root cause. This snapshot shows you where to look first.</p>
+            </div>
+            <div style="padding:24px; background:var(--gray-bg); border-radius:var(--radius-md); border-left:3px solid var(--orange);">
+              <h4 style="font-size:0.9375rem; margin-bottom:8px;">If you're preparing for transition</h4>
+              <p style="font-size:0.875rem; margin:0;">Leadership team risk is the first thing boards look at when evaluating a CEO transition. Get this read before they do.</p>
+            </div>
+          </div>
+          <div style="background:rgba(0,0,128,0.04); border:1px solid rgba(0,0,128,0.15); border-radius:var(--radius-md); padding:24px;">
+            <p style="font-size:0.9375rem; color:var(--ink); margin:0; line-height:1.7;"><strong>What we recommend:</strong> Book a 45-minute Leadership Team Risk Review. We'll walk through your results, quantify the cost of your top risks, and show you what it would take to close the gaps before your next board meeting.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Sidebar -->
+      <div class="results-sidebar">
+        <div class="overall-card">
+          <p style="font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(207,232,239,0.6);">Overall ELT Risk Score</p>
+          <div class="overall-num" id="overall-score">--</div>
+          <p class="overall-label">out of 100</p>
+          <div class="overall-tier" id="overall-tier-badge">Calculating...</div>
+          <p style="font-size:0.8125rem; color:rgba(207,232,239,0.6); margin-top:16px; line-height:1.5;">Higher = stronger foundation. Below 50 means significant risk heading into the next growth stage.</p>
+        </div>
+
+        <!-- Mini score bars -->
+        <div style="background:var(--gray-bg); border:1px solid var(--border); border-radius:var(--radius-md); padding:24px; margin-bottom:20px;">
+          <h4 style="font-size:0.875rem; margin-bottom:16px;">Score by dimension</h4>
+          <div id="mini-bars"></div>
+        </div>
+
+        <div class="cta-sidebar-card">
+          <p class="eyebrow" style="margin-bottom:8px;">Ready to close the gaps?</p>
+          <h4 style="font-size:1.0625rem; margin-bottom:12px;">Book a Leadership Team Risk Review</h4>
+          <p style="font-size:0.875rem; color:var(--ink-mid); margin-bottom:20px; line-height:1.6;">45 minutes. We walk through your results, quantify the cost of misalignment, and show you a clear path forward.</p>
+          <a href="contact.html" class="btn btn-primary" style="width:100%; justify-content:center;">Request a Risk Review &rarr;</a>
+          <p style="font-size:0.75rem; color:var(--ink-faint); text-align:center; margin-top:12px; margin-bottom:0;">No pitch. Just a read on your team.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="results-cta" style="display:none;">
+  <div class="container">
+    <p class="eyebrow">Next step</p>
+    <h2>Take the LDNA to see how your own wiring interacts with your team.</h2>
+    <p>The LDNA assessment gives you a read on your natural leadership style, how your role asks you to adapt, and what that gap is costing you. It's free and takes 6 minutes.</p>
+    <div class="cta-actions">
+      <a href="ldna.html" class="btn btn-primary btn-lg">Take the Free LDNA &rarr;</a>
+      <a href="contact.html" class="btn btn btn-outline-navy btn-lg">Book a Risk Review</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:16px;">
+          <img src="logo.png" alt="Vertical Motion">
+          <div class="nav-logo-text">
+            <span class="brand" style="color:white;">Vertical Motion</span>
+            <span class="tagline">ELT Scaling Suite</span>
+          </div>
+        </div>
+        <p>Build the team that scales your vision.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Tools</h5>
+        <ul>
+          <li><a href="scorecard.html">ELT Risk Scorecard</a></li>
+          <li><a href="ldna.html">LDNA Assessment</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col"></div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Vertical Motion. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20));
+document.getElementById('nav-hamburger').addEventListener('click', () => {
+  document.getElementById('nav-links').classList.toggle('open');
+});
+
+const dimMeta = {
+  A: { name: 'Composition & Fit',        weight: '25%', color: '#5B7C99' },
+  B: { name: 'Coverage & Complementarity', weight: '25%', color: '#5B7C99' },
+  C: { name: 'Bench Load & Durability',  weight: '20%', color: '#5B7C99' },
+  D: { name: 'Decision & Alignment',     weight: '15%', color: '#5B7C99' },
+  E: { name: 'Trust & Conflict',         weight: '15%', color: '#5B7C99' }
+};
+
+const insights = {
+  A: {
+    high:   'Role fit is your top risk. Strong people in mismatched seats create drag the whole company absorbs. Before your next hire or promotion, build a deliberate read on natural strengths and role requirements.',
+    medium: 'Fit is inconsistent. Some of your leaders are well-matched; others are spending energy adapting rather than performing. Worth mapping before you scale.',
+    low:    'Role fit looks solid. Your leaders are broadly well-matched to their strengths. The next question is whether that holds as roles evolve.'
+  },
+  B: {
+    high:   'Coverage gaps are significant. Your team likely shares more strengths than it covers blind spots. This means the gaps nobody fills become company-wide gaps at exactly the wrong time.',
+    medium: 'Coverage is partial. You have some complementarity but likely one or two significant blind spots that nobody on the current team covers well.',
+    low:    'Coverage looks intentional. Your team appears to complement each other's blind spots reasonably well. Keep it deliberate as you add headcount.'
+  },
+  C: {
+    high:   'Bench load and succession are your highest exposure. Key-person concentration is one of the most common leadership team failure modes at scale. If a critical leader left tomorrow, your risk is acute.',
+    medium: 'Bench load needs attention. There are signs of strain and succession gaps that could become acute in the next 6-12 months, especially under growth pressure.',
+    low:    'Load looks sustainable. Succession is developing. Keep investing in documentation and bench depth, especially as you grow headcount.'
+  },
+  D: {
+    high:   'Decision rights are unclear and alignment is fragile. When nobody knows who decides what, everything either stalls or escalates to you. This is a structural problem, not a people problem.',
+    medium: 'Decision-making is slowing you down. Alignment exists in all-hands meetings but breaks down when the doors close. Clarifying decision rights would unlock meaningful velocity.',
+    low:    'Decision-making and alignment look healthy. Cross-team decisions are moving and your leaders share direction. Focus on maintaining this as the team grows.'
+  },
+  E: {
+    high:   'Trust and conflict quality are low. Hard truths are being avoided, disagreements go underground, and accountability is inconsistent. This compounds every other risk on the team.',
+    medium: 'Trust is functional but fragile. Conflict tends to get smoothed over rather than resolved. This works until pressure spikes, and then it doesn\'t.',
+    low:    'Trust looks strong. Hard truths get surfaced, conflict is constructive, and accountability is a norm rather than an exception. This is the foundation everything else runs on.'
+  }
+};
+
+function getBarClass(score) {
+  if (score < 50) return 'red';
+  if (score < 75) return 'yellow';
+  return 'green';
+}
+function getTierLabel(score) {
+  if (score < 40) return ['Critical Risk', 'high'];
+  if (score < 60) return ['High Risk', 'high'];
+  if (score < 75) return ['Caution', 'medium'];
+  return ['Strong Foundation', 'low'];
+}
+function getInsight(dim, score) {
+  if (score < 50) return insights[dim].high;
+  if (score < 75) return insights[dim].medium;
+  return insights[dim].low;
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const raw = sessionStorage.getItem('elt_scorecard_result');
+  if (!raw) {
+    document.getElementById('no-data').style.display = 'block';
+    return;
+  }
+  const data = JSON.parse(raw);
+  const { scores, overall, userData } = data;
+
+  // Show sections
+  document.getElementById('results-main').style.display = 'block';
+  document.getElementById('results-cta').style.display = 'block';
+
+  // Hero personalization
+  if (userData && userData.name) {
+    const first = userData.name.split(' ')[0];
+    document.getElementById('hero-headline').textContent = first + ', here's your leadership team risk snapshot.';
+  }
+
+  // Overall score
+  document.getElementById('overall-score').textContent = overall;
+  const [tierLabel, tierType] = getTierLabel(overall);
+  const tierBadge = document.getElementById('overall-tier-badge');
+  tierBadge.textContent = tierLabel;
+  const tierClasses = { high: 'tier-critical', medium: 'tier-caution', low: 'tier-strong' };
+  tierBadge.className = 'overall-tier ' + tierClasses[tierType];
+
+  // Sort dims by score (ascending = highest risk first)
+  const sortedDims = Object.entries(scores).sort((a,b) => a[1]-b[1]);
+
+  // Top 3 risks
+  const riskEl = document.getElementById('top-risks');
+  sortedDims.slice(0,3).forEach(([dim, score], i) => {
+    const [, riskType] = getTierLabel(score);
+    const flagClass = i === 0 ? 'critical' : 'warning';
+    const div = document.createElement('div');
+    div.className = 'risk-flag ' + flagClass;
+    div.innerHTML = `
+      <div class="risk-flag-num">${i+1}</div>
+      <div class="risk-flag-body">
+        <h4>${dimMeta[dim].name} &mdash; Score: ${score}/100</h4>
+        <p>${getInsight(dim, score)}</p>
+      </div>
+    `;
+    riskEl.appendChild(div);
+  });
+
+  // Dimension cards
+  const dimEl = document.getElementById('dim-cards');
+  for (const [dim, score] of sortedDims) {
+    const barClass = getBarClass(score);
+    const [tierLbl, tierTyp] = getTierLabel(score);
+    const card = document.createElement('div');
+    card.className = 'dim-card';
+    card.innerHTML = `
+      <div class="dim-card-head">
+        <h4>${dimMeta[dim].name}</h4>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span class="risk-tier ${tierTyp}">${tierLbl}</span>
+          <strong style="font-family:var(--font-head); font-size:1.1rem; color:var(--ink);">${score}<span style="font-size:0.75rem; color:var(--ink-faint); font-weight:400;">/100</span></strong>
+        </div>
+      </div>
+      <div class="dim-card-body">
+        <div class="dim-bar-track"><div class="dim-bar-fill ${barClass}" style="width:${score}%; animation-delay:${Math.random()*0.3}s;"></div></div>
+        <p>${getInsight(dim, score)}</p>
+      </div>
+    `;
+    dimEl.appendChild(card);
+  }
+
+  // Mini bars in sidebar
+  const miniEl = document.getElementById('mini-bars');
+  for (const [dim, score] of Object.entries(scores)) {
+    const barClass = getBarClass(score);
+    const colors = { red: '#C62828', yellow: '#fd7e14', green: '#28a745' };
+    const div = document.createElement('div');
+    div.style.marginBottom = '14px';
+    div.innerHTML = `
+      <div style="display:flex; justify-content:space-between; font-size:0.8125rem; margin-bottom:5px;">
+        <span style="color:var(--ink-mid); font-weight:500;">${dimMeta[dim].name}</span>
+        <span style="font-weight:700; color:var(--ink);">${score}</span>
+      </div>
+      <div style="height:5px; background:var(--border); border-radius:3px; overflow:hidden;">
+        <div style="height:100%; width:${score}%; background:${colors[barClass]}; border-radius:3px;"></div>
+      </div>
+    `;
+    miniEl.appendChild(div);
+  }
+});
+</script>
+</body>
+</html>
