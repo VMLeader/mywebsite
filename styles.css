@@ -1,5 +1,5 @@
 /* ============================
-   VERTICAL MOTIONS — GLOBAL STYLES
+   VERTICAL MOTIONS â GLOBAL STYLES
    wholeexecutive.com
    ============================ */
 
@@ -557,7 +557,7 @@ nav.scrolled { box-shadow: 0 8px 40px rgba(8,30,43,0.35); }
 }
 .proof-quote {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
   color: var(--white);
   max-width: 760px;
   margin: 0 auto 20px;
