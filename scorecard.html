@@ -66,6 +66,12 @@
       .assessment-layout { grid-template-columns: 1fr; }
       .sidebar-card { position: static; }
     }
+    @media (max-width: 480px) {
+      .nav-btn-row { flex-direction: column; gap: 10px; }
+      .nav-btn-row .btn { width: 100%; justify-content: center; }
+      .option-letter { width: 28px; height: 28px; font-size: 0.75rem; flex-shrink: 0; }
+      .option-item { padding: 10px 12px; }
+    }
   </style>
 </head>
 <body>
