@@ -585,13 +585,13 @@ nav.scrolled { box-shadow: 0 8px 40px rgba(8,30,43,0.35); }
 }
 .for-card:hover { border-color: var(--slate); }
 .for-card-icon {
-  width: 56px; height: 56px;
+  width: 72px; height: 72px;
   border-radius: var(--radius-sm);
   background: var(--icy);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
-.for-card-icon img { width: 36px; height: 36px; object-fit: contain; }
+.for-card-icon img { width: 44px; height: 44px; object-fit: contain; display: block; }
 .for-card h4 { font-size: 0.9375rem; margin-bottom: 3px; }
 .for-card p  { font-size: 0.8125rem; color: var(--ink-soft); margin: 0; line-height: 1.5; }
 
