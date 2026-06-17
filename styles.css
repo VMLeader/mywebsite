@@ -304,7 +304,7 @@ nav.scrolled { box-shadow: 0 8px 40px rgba(8,30,43,0.35); }
 
 /* Hero risk card */
 .hero-risk-card {
-  margin-top: 64px;
+  margin-top: 48px;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 20px;
