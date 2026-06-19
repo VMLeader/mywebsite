@@ -6,6 +6,7 @@
   <title>ELT Risk Scorecard | Vertical Motion</title>
   <meta name="description" content="Score your executive team across role fit, bench depth, decisions, alignment, and trust. 20 questions, 5 dimensions, instant results. Free.">
   <link rel="canonical" href="https://vmleader.com/scorecard.html">
+  <!-- Open Graph -->
   <meta property="og:title" content="ELT Risk Scorecard | Vertical Motion">
   <meta property="og:description" content="Score your executive team across role fit, bench depth, decisions, alignment, and trust. 20 questions, 5 dimensions, instant results. Free.">
   <meta property="og:type" content="website">
@@ -15,13 +16,58 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="ELT Leadership Team Risk Scorecard — Free, 7 minutes, instant results.">
   <meta property="og:site_name" content="Vertical Motion ELT Scaling Suite">
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ELT Risk Scorecard | Vertical Motion">
   <meta name="twitter:description" content="Score your executive team across role fit, bench depth, decisions, alignment, and trust. 20 questions, 5 dimensions, instant results. Free.">
   <meta name="twitter:image" content="https://vmleader.com/assets/og/scorecard-og.png">
   <meta name="twitter:image:alt" content="ELT Leadership Team Risk Scorecard — Free, 7 minutes, instant results.">
+  <!-- Structured Data -->
   <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"ELT Risk Assessment","description":"A free 7-minute assessment scoring executive teams across 5 dimensions and identifying their top 3 leadership failure risks.","provider":{"@type":"Organization","name":"Vertical Motion","url":"https://vmleader.com"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/InStock"},"serviceType":"Executive Leadership Assessment","url":"https://vmleader.com/scorecard.html"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does the ELT Risk Scorecard measure?","acceptedAnswer":{"@type":"Answer","text":"Five dimensions: (A) Composition and Fit, (B) Coverage and Complementarity, (C) Bench Load and Durability, (D) Decision and Alignment, (E) Trust and Conflict. 20 questions total, scored 0-100 per dimension."}},{"@type":"Question","name":"How do I interpret my score?","acceptedAnswer":{"@type":"Answer","text":"Below 50 = high risk. 50-74 = watch closely. 75+ = solid foundation. Your overall score is a weighted average across all five dimensions."}}]}]}
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "ELT Risk Assessment",
+      "description": "A free 7-minute assessment scoring executive teams across 5 dimensions and identifying their top 3 leadership failure risks.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Vertical Motion",
+        "url": "https://vmleader.com"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "serviceType": "Executive Leadership Assessment",
+      "url": "https://vmleader.com/scorecard.html"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does the ELT Risk Scorecard measure?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Five dimensions: (A) Composition and Fit, (B) Coverage and Complementarity, (C) Bench Load and Durability, (D) Decision and Alignment, (E) Trust and Conflict. 20 questions total, scored 0-100 per dimension."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I interpret my score?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Below 50 = high risk. 50-74 = watch closely. 75+ = solid foundation. Your overall score is a weighted average across all five dimensions."
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" type="image/png" href="logo.png">
@@ -635,7 +681,8 @@ document.getElementById('optin-form').addEventListener('submit', function(e) {
     revenue:  document.getElementById('revenue').value,
     headcount: document.getElementById('headcount').value,
     teamsize:  document.getElementById('teamsize').value,
-    reason:   document.getElementById('reason').value
+    reason:   document.getElementById('reason').value,
+    optIn:    document.getElementById('optin-consent').checked
   };
   document.getElementById('optin-section').classList.remove('active');
   document.getElementById('assessment-section').classList.add('active');
