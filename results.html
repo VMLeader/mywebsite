@@ -114,7 +114,7 @@ const CONFIG = {
   CRM_API_KEY: ""            // only used by adapters that need a key (e.g. ConvertKit form key)
 };
 
-/* ===================== DATA: engine-grounded content =====================
+/* ======================= DATA: engine-grounded content =====================
    Sourced from docs/Team_Read_LDNA_Scoring_Map.md — do not invent here. */
 const DIM = {
   A:{key:"A", label:"Composition & Fit", weight:25,
@@ -229,6 +229,7 @@ async function captureLead(result, band, topRisk){
     const payload = {source:"elt_risk_scorecard", timestamp:result.timestamp,
       name:ud.name, email:ud.email, role:ud.role, revenue:ud.revenue,
       headcount:ud.headcount, teamsize:ud.teamsize, reason:ud.reason,
+      optIn:ud.optIn||false,
       overall:result.overall, band:band, topRisk:topRisk, scores:result.scores, answers:result.answers};
     const {url, opts} = buildCrmRequest(payload);
     await fetch(url, opts);
@@ -360,7 +361,31 @@ function renderCTA(route, lowestLabel){
 /* ===================== BOOT ===================== */
 (function(){
   let result=null;
+
+  // 1. Try sessionStorage (normal post-submit flow)
   try{ result = JSON.parse(sessionStorage.getItem("elt_scorecard_result")); }catch(e){}
+
+  // 2. Fall back to URL params (email link flow)
+  if(!result || !result.scores){
+    const p = new URLSearchParams(window.location.search);
+    if(p.get('overall')){
+      result = {
+        overall: parseInt(p.get('overall'))||0,
+        scores: {
+          A: parseInt(p.get('A'))||0,
+          B: parseInt(p.get('B'))||0,
+          C: parseInt(p.get('C'))||0,
+          D: parseInt(p.get('D'))||0,
+          E: parseInt(p.get('E'))||0
+        },
+        userData: {
+          name:   p.get('name')||'',
+          reason: p.get('reason')||''
+        }
+      };
+    }
+  }
+
   if(!result || !result.scores){
     document.getElementById("app").innerHTML =
       `<h1>No results to show yet</h1>
